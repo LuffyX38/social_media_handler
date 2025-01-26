@@ -10,9 +10,9 @@ app.use(express.json());
 const userRoute = require("./src/routes/user.route");
 const adminRoute = require("./src/routes/admin.route");
 
-app.use("/api/v1/home", (req, res) => {
+app.get("/", (req, res) => {
     res.status(200).json({
-        message:"This is home"
+        message:"Testing api!!!!"
     })
 })
 
