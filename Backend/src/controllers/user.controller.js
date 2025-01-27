@@ -16,7 +16,14 @@ exports.createUser = asyncHandler(async (req, res) => {
   
   if (!name || !social_profile) throw new ApiError(400, "All fields are required");
 
+  if (name.length < 8)
+      throw new ApiError(400, "Name should be atlease 8 characters long");
+
   const images = await uploadOnClouinary(req.files);
+
+  if (!images)
+    throw new ApiError(400, "Error uploading images");
+
   const imageRecords = images.map((image) => image.secure_url);
 
   const users = await User.create({ name, social_profile, images: imageRecords ? imageRecords : [] });
