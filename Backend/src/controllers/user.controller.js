@@ -6,14 +6,14 @@ const uploadOnClouinary = require("../utils/cloudinary");
 
 
 exports.showUsers = asyncHandler(async (req, res) => {
-  const users = await User.find();
+  const users = await User.find().sort({createdAt:-1});
   
   return res.status(200).json(new ApiResponse(200, users, `Total registered users: ${users.length}`));
 });
 
 exports.createUser = asyncHandler(async (req, res) => {
   const { name, social_profile } = req.body;
-
+  
   if (!name || !social_profile) throw new ApiError(400, "All fields are required");
 
   const images = await uploadOnClouinary(req.files);
