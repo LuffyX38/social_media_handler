@@ -95,6 +95,7 @@ exports.logout = asyncHandler(async (req, res) => {
     secure: true,
     sameSite: "None",
     path: "/",
+    expires: new Date(0)
   };
 
   return res
