@@ -22,7 +22,7 @@ const adminRoute = require("./src/routes/admin.route");
 
 app.get("/", (req, res) => {
   res.status(200).json({
-    message: "Testing api !!!!",
+    message: "Testing api -d !!!!",
   });
 });
 
