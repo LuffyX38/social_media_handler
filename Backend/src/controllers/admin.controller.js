@@ -93,7 +93,8 @@ exports.logout = asyncHandler(async (req, res) => {
   const option = {
     httpOnly: true,
     secure: true,
-    sameSite: "None"
+    sameSite: "None",
+    path: "/",
   };
 
   return res
