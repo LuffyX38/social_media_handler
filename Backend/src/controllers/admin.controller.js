@@ -25,7 +25,12 @@ exports.getMe = asyncHandler(async (req, res) => {
 });
 
 exports.register = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, confirmPassword } = req.body;
+  
+  if (password !== confirmPassword) throw new ApiError(400, "Passwords are not matching");
+
+  if (password.length < 8) throw new ApiError(400, "Password should be at least 8 characters long");
+
   if (!email || !password) throw new ApiError(400, "All fields are required");
 
   const user = await Admin.findOne({ email });
@@ -43,6 +48,7 @@ exports.register = asyncHandler(async (req, res) => {
 
 exports.login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  // if (password.length < 8) throw new ApiError(400, "Password should be at least 8 characters long");
   if (!email || !password) throw new ApiError(400, "All fields are required");
 
   const admin = await Admin.findOne({ email });
@@ -55,6 +61,7 @@ exports.login = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: true,
+    sameSite: "None"
   };
 
   return res
@@ -86,6 +93,7 @@ exports.logout = asyncHandler(async (req, res) => {
   const option = {
     httpOnly: true,
     secure: true,
+    sameSite: "None"
   };
 
   return res
