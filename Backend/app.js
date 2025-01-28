@@ -7,15 +7,13 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://ubiquitous-marzipan-58d132.netlify.app",
     credentials: true,
   })
 );
 
 app.use(cookieParser());
 app.use(express.json());
-
-
 
 const userRoute = require("./src/routes/user.route");
 const adminRoute = require("./src/routes/admin.route");
