@@ -98,6 +98,7 @@ exports.logout = asyncHandler(async (req, res) => {
   };
 
   return res
+    .setHeader("Cache-Control","no-store")
     .status(200)
     .clearCookie("refreshToken", option)
     .clearCookie("accessToken", option)
